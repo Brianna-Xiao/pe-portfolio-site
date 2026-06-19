@@ -22,11 +22,21 @@
 <body>
     {% include 'navbar.html' %}
 
-    <div class="profile">
-        <div id="profile-picture" class="profile-picture">
-            <img src="./static/img/logo.jpg">
+    <section class="hobbies">
+        <h1>Hobbies</h1>
+        <div class="hobbies-list">
+            {% for hobby in hobbies %}
+            <article class="hobby-card">
+                <div class="hobby-image">
+                    <img src="{{ url_for('static', filename=hobby.image) }}" alt="{{ hobby.name }}">
+                </div>
+                <div class="hobby-content">
+                    <h2>{{ hobby.name }}</h2>
+                    <p>{{ hobby.description }}</p>
+                </div>
+            </article>
+            {% endfor %}
         </div>
-        <h1>{{ title }}</h1>
-    </div>
+    </section>
 </body>
 </html>
