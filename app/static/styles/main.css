@@ -95,3 +95,54 @@ body {
     font-size: 50px;
     font-weight: 700;
 }
+
+.work-experience {
+    max-width: 700px;
+    margin: 0 auto 50px;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.work-experience h2 {
+    color: #1d539f;
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+.experience-list {
+    text-align: left;
+}
+
+.experience-item {
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #d8dee8;
+}
+
+.experience-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.experience-item h3 {
+    color: #1d539f;
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0 0 6px;
+}
+
+.experience-role {
+    color: #555;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0 0 12px;
+}
+
+.experience-item p:last-child {
+    color: #333;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+}
