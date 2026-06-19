@@ -1,0 +1,9 @@
+<article class="hobby-card">
+    <div class="hobby-image">
+        <img src="{{ url_for('static', filename=hobby.image) }}" alt="{{ hobby.name }}">
+    </div>
+    <div class="hobby-content">
+        <h2>{{ hobby.name }}</h2>
+        <p>{{ hobby.description }}</p>
+    </div>
+</article>
