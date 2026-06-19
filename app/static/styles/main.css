@@ -95,3 +95,24 @@ body {
     font-size: 50px;
     font-weight: 700;
 }
+
+.about {
+    max-width: 700px;
+    margin: 0 auto 50px;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.about h2 {
+    color: #1d539f;
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.about p {
+    color: #333;
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
