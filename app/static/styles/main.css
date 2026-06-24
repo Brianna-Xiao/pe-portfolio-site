@@ -2,6 +2,10 @@ p, h1, h2, h3, h4, h5, h6, button {
     font-family: "Roboto", serif;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     background-color: #f5f5f9;
     background-size: cover;
@@ -18,6 +22,7 @@ body {
     font-family: "Roboto", serif;
     font-weight: 700 !important;
     padding-top: 10px;
+    overflow: visible;
 }
 
 .nav-content .logo-touch-target {
@@ -47,6 +52,69 @@ body {
     text-align: right;
     padding-top: 0px;
     padding-right: 0px;
+}
+
+.nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0 20px 10px 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 24px;
+}
+
+.nav-links > li {
+    position: relative;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.nav-links > li > a:hover {
+    text-decoration: underline;
+}
+
+.nav-dropdown {
+    padding-bottom: 8px;
+}
+
+.nav-dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    min-width: 180px;
+    margin: 0;
+    padding: 8px 0;
+    list-style: none;
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 100;
+}
+
+.nav-dropdown:hover .nav-dropdown-menu,
+.nav-dropdown:focus-within .nav-dropdown-menu {
+    display: block;
+}
+
+.nav-dropdown-menu a {
+    display: block;
+    padding: 10px 16px;
+    color: #1d539f;
+    text-decoration: none;
+    font-size: 15px;
+    white-space: nowrap;
+}
+
+.nav-dropdown-menu a:hover {
+    background-color: #f5f5f9;
+    text-decoration: none;
 }
 
 .profile {
@@ -96,11 +164,157 @@ body {
     font-weight: 700;
 }
 
-.travel {
-    max-width: 900px;
-    margin: 50px auto;
+.about {
+    max-width: 700px;
+    margin: 0 auto 50px;
     padding: 0 20px;
     text-align: center;
+    scroll-margin-top: 20px;
+}
+
+.about h2 {
+    color: #1d539f;
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.about p {
+    color: #333;
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.education {
+    max-width: 700px;
+    margin: 0 auto 50px;
+    padding: 0 20px;
+    text-align: center;
+    scroll-margin-top: 20px;
+}
+
+.education h2 {
+    color: #1d539f;
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+.education-list {
+    text-align: left;
+}
+
+.education-item {
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #d8dee8;
+}
+
+.education-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.education-item h3 {
+    color: #1d539f;
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0 0 6px;
+}
+
+.education-meta,
+.education-program,
+.education-dates {
+    color: #555;
+    font-size: 16px;
+    margin: 0 0 6px;
+}
+
+.education-program {
+    font-weight: 500;
+    color: #333;
+}
+
+.education-dates {
+    margin-bottom: 12px;
+}
+
+.education-highlights {
+    color: #333;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+    padding-left: 20px;
+}
+
+.education-highlights li {
+    margin-bottom: 6px;
+}
+
+.education-highlights li:last-child {
+    margin-bottom: 0;
+}
+
+.work-experience {
+    max-width: 700px;
+    margin: 0 auto 50px;
+    padding: 0 20px;
+    text-align: center;
+    scroll-margin-top: 20px;
+}
+
+.work-experience h2 {
+    color: #1d539f;
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+.experience-list {
+    text-align: left;
+}
+
+.experience-item {
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #d8dee8;
+}
+
+.experience-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.experience-item h3 {
+    color: #1d539f;
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0 0 6px;
+}
+
+.experience-role {
+    color: #555;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0 0 12px;
+}
+
+.experience-item p:last-child {
+    color: #333;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.travel {
+    max-width: 900px;
+    margin: 0 auto 50px;
+    padding: 0 20px;
+    text-align: center;
+    scroll-margin-top: 20px;
 }
 
 .travel h2 {
@@ -122,4 +336,82 @@ body {
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     z-index: 0;
+}
+
+.hobbies {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.hobbies h1 {
+    color: #1d539f;
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+.hobbies-list {
+    text-align: left;
+}
+
+.hobby-card {
+    display: flex;
+    align-items: stretch;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    margin-bottom: 30px;
+}
+
+.hobby-card:last-child {
+    margin-bottom: 0;
+}
+
+.hobby-image {
+    flex: 0 0 280px;
+    background-color: #f5f5f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+}
+
+.hobby-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    border-radius: 4px;
+}
+
+.hobby-content {
+    flex: 1;
+    padding: 20px;
+}
+
+.hobby-content h2 {
+    color: #1d539f;
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0 0 10px;
+}
+
+.hobby-content p {
+    color: #333;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+@media (max-width: 640px) {
+    .hobby-card {
+        flex-direction: column;
+    }
+
+    .hobby-image {
+        flex: none;
+    }
 }

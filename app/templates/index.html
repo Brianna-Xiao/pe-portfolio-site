@@ -23,29 +23,63 @@
 </head>
 
 <body>
-    <header class="nav-bar">
-        <div class="nav-content">
-            <a href="/">
-                <div class="nav-logo">
-                    <img src="./static/img/logo.svg" />
-                </div>
-            </a>
-        </div>
-    </header>
+    {% include 'navbar.html' %}
 
     <div class="profile">
         <div id="profile-picture" class="profile-picture">
-            <img src="./static/img/logo.jpg">
+            <img src="./static/img/Brianna_headshot.png">
         </div>
         <h1>{{ title }}</h1>
     </div>
 
-    <section class="travel">
+    <section id="about" class="about">
+        <h2>About Me</h2>
+        <p>
+            Hi, I'm Brianna Xiao — a Computer Science student at Western University who loves building things that mix creativity, community, and code. I'm interested in software engineering, product development, and creating projects that feel both useful and fun.
+        </p>
+        <p>
+            Outside of coding, you'll probably find me debating, dancing to K-pop, playing violin, sketching ideas, or planning events with student communities. I love turning messy ideas into real projects, whether that's a hackathon prototype, a club initiative, or a portfolio site like this one.
+        </p>
+    </section>
+
+    <section id="education" class="education">
+        <h2>Education</h2>
+        <div class="education-list">
+            {% for entry in education %}
+            <div class="education-item">
+                <h3>{{ entry.school }}</h3>
+                <p class="education-meta">{{ entry.location }}</p>
+                <p class="education-program">{{ entry.program }}</p>
+                <p class="education-dates">{{ entry.dates }}</p>
+                <ul class="education-highlights">
+                    {% for highlight in entry.highlights %}
+                    <li>{{ highlight }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section id="work-experience" class="work-experience">
+        <h2>Work Experience</h2>
+        <div class="experience-list">
+            {% for experience in work_experiences %}
+            <div class="experience-item">
+                <h3>{{ experience.company }}</h3>
+                <p class="experience-role">{{ experience.role }}</p>
+                <p>{{ experience.description }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section id="travel-map" class="travel">
         <h2>Travel Map</h2>
         <p class="travel-intro">
             Places I have lived in or traveled to around the world.
         </p>
-        <div id="travel-map" class="travel-map"></div>
+        <div id="travel-map-container" class="travel-map"></div>
     </section>
 
     <script id="travel-locations" type="application/json">{{ locations | tojson }}</script>
@@ -57,7 +91,8 @@
             document.getElementById('travel-locations').textContent
         );
 
-        const map = L.map('travel-map');
+        const map = L.map('travel-map-container');
+        window.portfolioMap = map;
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 18,
