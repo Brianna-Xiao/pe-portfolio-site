@@ -1,9 +1,14 @@
 import os
-from flask import Flask, render_template, request
+from flask import Flask, render_template
 from dotenv import load_dotenv
 
 load_dotenv()
 app = Flask(__name__)
+
+PAGES = [
+    {"name": "Home", "endpoint": "index"},
+    {"name": "Hobbies", "endpoint": "hobbies"},
+]
 
 WORK_EXPERIENCES = [
     {
@@ -126,6 +131,11 @@ HOBBIES = [
         "image": "img/art.jpg",
     },
 ]
+
+
+@app.context_processor
+def inject_pages():
+    return {"pages": PAGES}
 
 
 @app.route('/')
