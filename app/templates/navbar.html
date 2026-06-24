@@ -1,0 +1,63 @@
+<header class="nav-bar">
+    <div class="nav-content">
+        <a href="{{ url_for('index') }}">
+            <div class="nav-logo">
+                <img src="./static/img/logo.svg" />
+            </div>
+        </a>
+        <nav>
+            <ul class="nav-links">
+                {% for page in pages %}
+                <li{% if page.sections %} class="nav-dropdown"{% endif %}>
+                    <a href="{{ url_for(page.endpoint) }}">{{ page.name }}</a>
+                    {% if page.sections %}
+                    <ul class="nav-dropdown-menu">
+                        {% for section in page.sections %}
+                        <li>
+                            <a
+                                href="{{ url_for(page.endpoint) }}#{{ section.anchor }}"
+                                class="nav-section-link"
+                                data-section="{{ section.anchor }}"
+                            >{{ section.name }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+        </nav>
+    </div>
+</header>
+<script>
+    function scrollToSection(sectionId) {
+        const section = document.getElementById(sectionId);
+        if (section) {
+            section.scrollIntoView({ behavior: 'smooth' });
+            history.pushState(null, '', '#' + sectionId);
+            if (sectionId === 'travel-map' && window.portfolioMap) {
+                setTimeout(function () {
+                    window.portfolioMap.invalidateSize();
+                }, 300);
+            }
+        }
+    }
+
+    document.querySelectorAll('.nav-section-link').forEach(function (link) {
+        link.addEventListener('click', function (event) {
+            const sectionId = this.dataset.section;
+            const onHomePage = window.location.pathname === '{{ url_for("index") }}';
+
+            if (onHomePage) {
+                event.preventDefault();
+                scrollToSection(sectionId);
+            }
+        });
+    });
+
+    window.addEventListener('load', function () {
+        if (window.location.hash) {
+            scrollToSection(window.location.hash.slice(1));
+        }
+    });
+</script>
