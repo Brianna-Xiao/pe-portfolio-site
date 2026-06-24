@@ -52,7 +52,7 @@ WORK_EXPERIENCES = [
 def index():
     return render_template(
         'index.html',
-        title="MLH Fellow",
+        title="Brianna Xiao",
         url=os.getenv("URL"),
         work_experiences=WORK_EXPERIENCES,
     )
