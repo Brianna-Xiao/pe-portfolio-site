@@ -46,17 +46,7 @@
         <h2>Education</h2>
         <div class="education-list">
             {% for entry in education %}
-            <div class="education-item">
-                <h3>{{ entry.school }}</h3>
-                <p class="education-meta">{{ entry.location }}</p>
-                <p class="education-program">{{ entry.program }}</p>
-                <p class="education-dates">{{ entry.dates }}</p>
-                <ul class="education-highlights">
-                    {% for highlight in entry.highlights %}
-                    <li>{{ highlight }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
+            {% include 'education_entry.html' %}
             {% endfor %}
         </div>
     </section>
@@ -65,11 +55,7 @@
         <h2>Work Experience</h2>
         <div class="experience-list">
             {% for experience in work_experiences %}
-            <div class="experience-item">
-                <h3>{{ experience.company }}</h3>
-                <p class="experience-role">{{ experience.role }}</p>
-                <p>{{ experience.description }}</p>
-            </div>
+            {% include 'experience.html' %}
             {% endfor %}
         </div>
     </section>
