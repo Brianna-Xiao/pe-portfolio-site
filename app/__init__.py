@@ -52,6 +52,10 @@ PAGES = [
         "name": "Hobbies",
         "endpoint": "hobbies",
     },
+    {
+        "name": "Timeline",
+        "endpoint": "timeline",
+    },
 ]
 
 WORK_EXPERIENCES = [
@@ -332,3 +336,11 @@ def get_timeline_post():
             for post in timeline_posts
         ]
     }
+
+@app.route("/timeline")
+def timeline():
+    return render_template(
+        "timeline.html",
+        title="Timeline",
+        url=os.getenv("URL"),
+    )
