@@ -9,6 +9,7 @@ git reset --hard origin/main
 source python3-virtualenv/bin/activate
 pip install -r requirements.txt
 
-systemctl daemon-reload
 systemctl restart myportfolio.service
-systemctl status myportfolio.service --no-pager
+systemctl --no-pager --full status myportfolio.service
+
+echo "Redeploy successful: myportfolio service restarted."
