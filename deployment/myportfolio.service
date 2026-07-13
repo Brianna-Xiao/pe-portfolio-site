@@ -7,7 +7,7 @@ Requires=mysqld.service
 User=root
 Group=root
 WorkingDirectory=/root/pe-portfolio-site
-EnvironmentFile=/root/pe-portfolio-site/.env
+EnvironmentFile=/etc/sysconfig/myportfolio
 Environment=FLASK_APP=app
 ExecStart=/root/pe-portfolio-site/python3-virtualenv/bin/python -m flask run --host=0.0.0.0 --port=5000
 Restart=always
