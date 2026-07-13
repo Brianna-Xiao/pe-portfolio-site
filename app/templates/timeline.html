@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ title }}</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='styles/main.css') }}"
+    >
+
+    <style>
+        .timeline-page {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .timeline-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .timeline-form {
+            display: grid;
+            gap: 16px;
+            padding: 24px;
+            margin-bottom: 32px;
+            border-radius: 12px;
+            background: white;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        }
+
+        .timeline-form input,
+        .timeline-form textarea {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px;
+            border: 1px solid #cccccc;
+            border-radius: 8px;
+            font: inherit;
+        }
+
+        .timeline-form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .timeline-form button {
+            padding: 12px 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .form-message {
+            min-height: 24px;
+            margin: 0;
+        }
+
+        .timeline-posts {
+            display: grid;
+            gap: 18px;
+        }
+
+        .timeline-card {
+            padding: 20px;
+            border-radius: 12px;
+            background: white;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        }
+
+        .timeline-card h3 {
+            margin-top: 0;
+            margin-bottom: 4px;
+        }
+
+        .timeline-email,
+        .timeline-date {
+            margin: 4px 0;
+            color: #666666;
+            font-size: 0.9rem;
+        }
+
+        .timeline-content {
+            margin-top: 14px;
+            white-space: pre-wrap;
+        }
+
+        .empty-message {
+            text-align: center;
+            color: #666666;
+        }
+    </style>
+</head>
+
+<body>
+    {% include "navbar.html" %}
+
+    <main class="timeline-page">
+        <section class="timeline-header">
+            <h1>Timeline</h1>
+            <p>Share an update about your school, career, or personal journey.</p>
+        </section>
+
+        <form id="timeline-form" class="timeline-form">
+            <div>
+                <label for="name">Name</label>
+                <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    required
+                >
+            </div>
+
+            <div>
+                <label for="email">Email</label>
+                <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                >
+            </div>
+
+            <div>
+                <label for="content">Update</label>
+                <textarea
+                    id="content"
+                    name="content"
+                    required
+                ></textarea>
+            </div>
+
+            <button type="submit">Post Update</button>
+
+            <p id="form-message" class="form-message"></p>
+        </form>
+
+        <section>
+            <h2>Recent Posts</h2>
+            <div id="timeline-posts" class="timeline-posts">
+                <p class="empty-message">Loading posts...</p>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const form = document.getElementById("timeline-form");
+        const formMessage = document.getElementById("form-message");
+        const postsContainer = document.getElementById("timeline-posts");
+
+        function createPostCard(post) {
+            const card = document.createElement("article");
+            card.className = "timeline-card";
+
+            const name = document.createElement("h3");
+            name.textContent = post.name;
+
+            const email = document.createElement("p");
+            email.className = "timeline-email";
+            email.textContent = post.email;
+
+            const date = document.createElement("p");
+            date.className = "timeline-date";
+            date.textContent = new Date(post.created_at).toLocaleString();
+
+            const content = document.createElement("p");
+            content.className = "timeline-content";
+            content.textContent = post.content;
+
+            card.append(name, email, date, content);
+
+            return card;
+        }
+
+        function displayPosts(posts) {
+            postsContainer.innerHTML = "";
+
+            if (posts.length === 0) {
+                const emptyMessage = document.createElement("p");
+                emptyMessage.className = "empty-message";
+                emptyMessage.textContent = "No timeline posts yet.";
+                postsContainer.appendChild(emptyMessage);
+                return;
+            }
+
+            posts.forEach((post) => {
+                postsContainer.appendChild(createPostCard(post));
+            });
+        }
+
+        async function loadPosts() {
+            try {
+                const response = await fetch("/api/timeline_post");
+
+                if (!response.ok) {
+                    throw new Error("Unable to retrieve timeline posts.");
+                }
+
+                const data = await response.json();
+                displayPosts(data.timeline_posts);
+            } catch (error) {
+                postsContainer.innerHTML = "";
+
+                const errorMessage = document.createElement("p");
+                errorMessage.className = "empty-message";
+                errorMessage.textContent = error.message;
+                postsContainer.appendChild(errorMessage);
+            }
+        }
+
+        form.addEventListener("submit", async (event) => {
+            event.preventDefault();
+
+            formMessage.textContent = "Posting...";
+
+            try {
+                const formData = new FormData(form);
+
+                const response = await fetch("/api/timeline_post", {
+                    method: "POST",
+                    body: formData,
+                });
+
+                if (!response.ok) {
+                    throw new Error("Unable to create timeline post.");
+                }
+
+                form.reset();
+                formMessage.textContent = "Your update was posted successfully.";
+
+                await loadPosts();
+            } catch (error) {
+                formMessage.textContent = error.message;
+            }
+        });
+
+        loadPosts();
+    </script>
+</body>
+</html>
