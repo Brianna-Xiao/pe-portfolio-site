@@ -6,10 +6,7 @@ cd /root/pe-portfolio-site
 git fetch origin
 git reset --hard origin/main
 
-source python3-virtualenv/bin/activate
-pip install -r requirements.txt
+docker compose -f docker-compose.prod.yml down
+docker compose -f docker-compose.prod.yml up -d --build
 
-systemctl restart myportfolio.service
-systemctl --no-pager --full status myportfolio.service
-
-echo "Redeploy successful: myportfolio service restarted."
+echo "Redeploy successful: Docker containers rebuilt and started."
