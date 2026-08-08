@@ -65,3 +65,9 @@ jobs:
         run: |
           curl -s -X POST "${{ secrets.DISCORD_WEBHOOK }}" \
             -d "content=🚀 Deployment Successful"
+      
+      - name: Send Discord failure notification
+        if: failure()
+        run: |
+          curl -s -X POST "${{ secrets.DISCORD_WEBHOOK }}" \
+            -d "content=🚨 Deployment Failed"
