@@ -130,7 +130,7 @@ EDUCATION = [
         "program": "International Baccalaureate (IB) Diploma Programme",
         "dates": "Graduated: 2024",
         "highlights": [
-            "IB Score: 40/45",
+            "IB Score: 41/45",
             "Debate Club President",
             "DECA Head Trainer",
             "Social Justice Council Executive",
