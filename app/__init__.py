@@ -65,6 +65,16 @@ PAGES = [
 
 WORK_EXPERIENCES = [
     {
+    "company": "Meta x MLH",
+    "role": "Production Engineering Fellow",
+    "description": (
+        "Developed and deployed full-stack applications while learning production engineering "
+        "principles including Linux system administration, Docker, GitHub Actions CI/CD, "
+        "MySQL, Redis, Nginx, HTTPS, and automated testing. Built reliable deployment "
+        "pipelines and production-ready services on cloud infrastructure."
+    ),
+    },
+    {
         "company": "CIBC",
         "role": "Software Engineering Intern",
         "description": (
