@@ -19,7 +19,7 @@ app = Flask(__name__)
 
 if os.getenv("TESTING") == "true":
     print("Running in test mode")
-    mydb = SqliteDatabase('file:memory?mode=memory&cache=shared', uri=True)
+    mydb = SqliteDatabase("file:memory?mode=memory&cache=shared", uri=True)
 else:
     mydb = MySQLDatabase(
         os.getenv("MYSQL_DATABASE"),
@@ -29,6 +29,7 @@ else:
         port=3306,
     )
 
+
 class TimelinePost(Model):
     name = CharField()
     email = CharField()
@@ -37,6 +38,15 @@ class TimelinePost(Model):
 
     class Meta:
         database = mydb
+
+
+@app.route("/health")
+def health():
+    try:
+        mydb.execute_sql("SELECT 1")
+        return {"status": "ok"}, 200
+    except Exception as e:
+        return {"status": "error", "message": str(e)}, 500
 
 
 mydb.connect(reuse_if_open=True)
@@ -313,6 +323,7 @@ def hobbies():
         hobbies=HOBBIES,
     )
 
+
 @app.route("/api/timeline_post", methods=["POST"])
 def post_timeline_post():
     name = request.form.get("name", "").strip()
@@ -348,6 +359,7 @@ def get_timeline_post():
             for post in timeline_posts
         ]
     }
+
 
 @app.route("/timeline")
 def timeline():
